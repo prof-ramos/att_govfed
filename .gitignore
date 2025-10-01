@@ -1,0 +1,15 @@
+# Virtual environment
+.venv/
+
+# Processed data
+data/processed/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# OS-specific files
+.DS_Store
+
+.gemini/
+gha-creds-*.json
