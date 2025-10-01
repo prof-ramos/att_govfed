@@ -57,6 +57,8 @@ os.makedirs(processed_data_dir, exist_ok=True)
 
 all_data = []
 
+os.makedirs(raw_data_dir, exist_ok=True)
+
 # Loop through all files in the raw data directory
 for filename in os.listdir(raw_data_dir):
     if filename.endswith(('.xlsx', '.xls')):
