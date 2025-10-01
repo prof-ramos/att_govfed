@@ -1,4 +1,3 @@
-
 import pandas as pd
 import sqlite3
 import os
@@ -47,12 +46,9 @@ def normalize_column_names(df):
     return df
 
 
-# Define base directory
-base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-# Define paths
-raw_data_dir = os.path.join(base_dir, 'data', 'raw')
-processed_data_dir = os.path.join(base_dir, 'data', 'processed')
+# Define paths relative to the project root
+raw_data_dir = 'data/raw'
+processed_data_dir = 'data/processed'
 db_file = os.path.join(processed_data_dir, 'autorizacoes.db')
 csv_file = os.path.join(processed_data_dir, 'autorizacoes.csv')
 
@@ -60,6 +56,8 @@ csv_file = os.path.join(processed_data_dir, 'autorizacoes.csv')
 os.makedirs(processed_data_dir, exist_ok=True)
 
 all_data = []
+
+os.makedirs(raw_data_dir, exist_ok=True)
 
 # Loop through all files in the raw data directory
 for filename in os.listdir(raw_data_dir):
