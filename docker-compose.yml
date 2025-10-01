@@ -1,0 +1,41 @@
+version: "3.9"
+
+# Stack pensada para Portainer (modo Swarm), com volumes e rede dedicados.
+services:
+  autorizacoes-api:
+    image: ${AUTORIZACOES_IMAGE:-autorizacoes-api:latest}
+    # Em ambientes Swarm, é necessário que a imagem já esteja disponível no registry.
+    ports:
+      - "8000:8000"
+    environment:
+      # DATA_ROOT é lido pela aplicação para localizar diretórios de dados.
+      - DATA_ROOT=/var/lib/autorizacoes
+    volumes:
+      - raw-data:/var/lib/autorizacoes/raw
+      - processed-data:/var/lib/autorizacoes/processed
+    networks:
+      - api-network
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 512M
+        reservations:
+          cpus: "0.10"
+          memory: 128M
+      labels:
+        # Labels utilizadas pelo Portainer para identificação e ordenação.
+        - com.portainer.stack=autorizacoes-api
+        - com.portainer.author=devops-team
+
+volumes:
+  raw-data:
+    name: autorizacoes_raw
+  processed-data:
+    name: autorizacoes_processed
+
+networks:
+  api-network:
+    name: autorizacoes_network
+    driver: overlay

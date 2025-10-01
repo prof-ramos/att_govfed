@@ -1,0 +1,13 @@
+# Ignora artefatos locais e diretórios que não devem ir para o build context
+.git
+.github
+__pycache__
+*.pyc
+.venv
+.env
+.data
+Dockerfile
+docker-compose.yml
+DEPLOY.md
+docs/
+data/processed/
